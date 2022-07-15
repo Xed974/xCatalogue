@@ -8,32 +8,32 @@ Citizen.CreateThread(function()
 end)
 
 local function TestCar()
-    Citizen.CreateThread(function()
-        local test = true
-        local result = (Catalogue.TimeTest * 60)
 
-        while test do
-            result = result - 1
+    local test = true
+    local result = (Catalogue.TimeTest * 60)
 
-            while IsPedInAnyVehicle(PlayerPedId()) == false do
-                DeleteEntity(GetClosestVehicle(GetEntityCoords(PlayerPedId()), 15.0, 0, 70))
-                ESX.Game.Teleport(PlayerPedId(), Catalogue.Position.SpwanCar, function()end)
-                ESX.ShowNotification("~r~Vous êtes descendu du véhicule.")
-                FreezeEntityPosition(PlayerPedId(), false)
-                test = false
-                break
-            end
-            if result == 0 then
-                DeleteEntity(GetVehiclePedIsIn(PlayerPedId(), false))
-                ESX.Game.Teleport(PlayerPedId(), Catalogue.Position.SpwanCar, function()end)
-                ESX.ShowNotification("~r~Test terminé.")
-                FreezeEntityPosition(PlayerPedId(), false)
-                test = false
-                break
-            end
-            Wait(1000)
+    while test do
+        result = result - 1
+        print(result)
+
+        while IsPedInAnyVehicle(PlayerPedId()) == false do
+            DeleteEntity(GetClosestVehicle(GetEntityCoords(PlayerPedId()), 15.0, 0, 70))
+            ESX.Game.Teleport(PlayerPedId(), Catalogue.Position.SpwanCar, function()end)
+            ESX.ShowNotification("~r~Vous êtes descendu du véhicule.")
+            FreezeEntityPosition(PlayerPedId(), false)
+            test = false
+            break
         end
-    end)
+        if result == 0 then
+            DeleteEntity(GetVehiclePedIsIn(PlayerPedId(), false))
+            ESX.Game.Teleport(PlayerPedId(), Catalogue.Position.SpwanCar, function()end)
+            ESX.ShowNotification("~r~Test terminé.")
+            FreezeEntityPosition(PlayerPedId(), false)
+            test = false
+            break
+        end
+        Wait(1000)
+    end
 end
 
 local resultCategoriesC = {}
@@ -102,8 +102,8 @@ local function MenuCatalogue()
                                 SetVehicleDirtLevel(vehicle, 0)
                                 SetPedIntoVehicle(PlayerPedId(), vehicle, -1)
                                 TestCar()
-                                RageUI.CloseAll()
                             end)
+                            RageUI.CloseAll()
                             ESX.ShowNotification("Pensez à bien vous attachez !")
                         end
                     })
