@@ -3,7 +3,7 @@ Script de Catalogue Concessionnaire RUI V2 opti 0.00ms.
 
 - ESX
 - RageUI V2
-- Optimiser 0.01ms
+- Optimiser 0.00ms
 - Liste des véhicules afficher par lecture SQL
 - Test du véhicule (temps configurable)
 - Couleur menu configurable
